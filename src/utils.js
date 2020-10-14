@@ -87,8 +87,16 @@ export function getDuplicateCanonical() {
   return document.head.querySelectorAll('link[rel="canonical"]');
 }
 
-export function getDuplicateJsonLd() {
-  return document.head.querySelectorAll('script[type="application/ld+json"]');
+export function getDuplicateJsonLd(jsonLdScript) {
+  const head = document.head;
+  const { id } = jsonLdScript;
+
+  //if has id and element with id is not present than return the element
+  if (id) {
+    return id && head.querySelector(`#${id}`);
+  }
+
+  return null;
 }
 
 export function getDuplicateMeta(meta) {
